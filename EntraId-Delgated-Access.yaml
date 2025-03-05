@@ -1,0 +1,26 @@
+openapi: 3.0.0
+
+info:
+    title: Microsoft Entra ID - Delegated User Actions via Extension
+    description: Microsoft Entra ID - Delegated User Actions via Extension
+    version: "v1"
+
+servers:
+    - url: https://graph.microsoft.com/v1.0
+
+paths:
+    /users/{userPrincipalName}:
+        get:
+            operationId: Entra ID - Get User Details
+            description: Get all the details about a user.
+            summary: This skill will reset a password for a user.
+            parameters:
+                - in: path
+                  name: userPrincipalName
+                  schema:
+                      type: string
+                  required: true
+                  description: Enter username for which you would like to get all the information.
+            responses:
+                "200":
+                    description: OK
