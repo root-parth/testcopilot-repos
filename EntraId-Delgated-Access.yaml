@@ -9,7 +9,7 @@ servers:
     - url: https://graph.microsoft.com/v1.0
 
 paths:
-    /users/{userPrincipalName}?$select=accountEnabled,authorizationInfo,businessPhones,city,companyName,country,createdDateTime,creationType,department,displayName,employeeId,givenName,id,imAddresses,jobTitle,lastPasswordChangeDateTime,mail,mailNickname,mobilePhone,officeLocation,securityIdentifier,state,streetAddress,surname,usageLocation,userPrincipalName,userType:
+    /users/{userPrincipalName}:
         get:
             operationId: Entra ID - Get User Details
             description: Get all the details about a user.
