@@ -1,14 +1,29 @@
 openapi: 3.0.0
 
 info:
-    title: Microsoft Entra ID - Delegated User Actions via Extension
-    description: Microsoft Entra ID - Delegated User Actions via Extension
+    title: Microsoft Entra ID - Delegated User Actions via Add-On
+    description: Microsoft Entra ID - Delegated User Actions via Add-On
     version: "v1"
 
 servers:
     - url: https://graph.microsoft.com/v1.0
 
 paths:
+    /users/{userPrincipalName}/revokeSignInSessions:
+        post:
+            operationId: Entra ID - Revoke User Sessions
+            summary: This skill will revoke all the active sessions of a user.
+            description: This skill will revoke all the active sessions of a user.
+            parameters:
+                - in: path
+                  name: userPrincipalName
+                  schema:
+                      type: string
+                  required: true
+                  description: The userPrincipalName whose sessions you would like to revoke.
+            responses:
+                "200":
+                    description: OK 
     /users/{userPrincipalName}:
         get:
             operationId: Entra ID - Get User Details
@@ -24,3 +39,33 @@ paths:
             responses:
                 "200":
                     description: OK
+        patch:
+            operationId: Entra ID - Enable or Disable user
+            summary: This skill will block the sign-ins of an Entra ID user.
+            parameters:
+                - in: path
+                  name: userPrincipalName
+                  schema:
+                      type: string
+                  required: true
+                  description: The userPrincipalName whose account you want to Enable or Disable.
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                accountEnabled:
+                                    type: boolean
+                                    enum: 
+                                        - true
+                                        - false
+                                    description: Set this value as "true" if you want to enable an account, opposite is true for "false".
+                            required:
+                                - accountEnabled
+            responses:
+                "200":
+                    description: OK
+                "204":
+                    description: Successful
